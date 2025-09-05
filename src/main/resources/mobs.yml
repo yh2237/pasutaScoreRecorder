@@ -1,0 +1,55 @@
+#   _____                    _____                        _
+#  / ____|                  |  __ \                      | |
+# | (___   ___ ___  _ __ ___| |__) |___  ___ ___  _ __ __| | ___ _ __
+#  \___ \ / __/ _ \| '__/ _ \  _  // _ \/ __/ _ \| '__/ _` |/ _ \ '__|
+#  ____) | (_| (_) | | |  __/ | \ \  __/ (_| (_) | | | (_| |  __/ |
+# |_____/ \___\___/|_|  \___|_|  \_\___|\___\___/|_|  \__,_|\___|_|   by yh
+
+# モブを倒したときに得られるスコアを設定するファイル
+
+# 記入されてないIDのモブのスコア
+# default: <スコア>
+default: 1
+
+# 倒してもスコアを得られないモブ
+# excluded:
+#   - <ID>
+#   - <ID>
+excluded:
+
+# モブを倒したときに得られるスコア
+# <ID>: <スコア>
+
+minecraft:zombie: 1
+minecraft:husk: 1
+minecraft:drowned: 1
+minecraft:skeleton: 1
+minecraft:stray: 2
+minecraft:creeper: 1
+minecraft:spider: 1
+minecraft:cave_spider: 1
+minecraft:witch: 2
+minecraft:slime: 2
+minecraft:phantom: 1
+minecraft:guardian: 2
+minecraft:pillager: 1
+minecraft:vindicator: 2
+minecraft:evoker: 5
+minecraft:ravager: 5
+minecraft:zombified_piglin: 4
+minecraft:piglin: 8
+minecraft:piglin_brute: 5
+minecraft:hoglin: 2
+minecraft:zoglin: 2
+minecraft:ghast: 2
+minecraft:blaze: 2
+minecraft:magma_cube: 3
+minecraft:wither_skeleton: 2
+minecraft:enderman: 3
+minecraft:wolf: 3
+minecraft:polar_bear: 3
+minecraft:iron_golem: 3
+minecraft:elder_guardian: 5
+minecraft:warden: 20
+minecraft:wither: 10
+minecraft:ender_dragon: 20

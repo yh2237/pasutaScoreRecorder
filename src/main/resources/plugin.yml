@@ -1,0 +1,23 @@
+name: Pasuta_ScoreRecorder
+version: '1.0.0'
+main: net._2237yh.pasuta_ScoreRecorder.PasutaScoreRecorder
+api-version: '1.21'
+softdepend: [PlaceholderAPI]
+authors: [ yh ]
+description: 簡単なスコア操作を行うプラグイン
+
+permissions:
+  pasutascore.admin:
+    description: Pasuta_ScoreRecorderの管理者コマンドへのアクセスを許可します。
+    default: op
+
+commands:
+  psr:
+    description: スコアでアイテムを交換するコマンド
+    usage: /psr give <player> <item> <cost>
+  wallet:
+    description: ウォレットを操作するコマンド
+    usage: /wallet
+  panel:
+    description: スコアボードの表示を切り替えるコマンド
+    usage: /panel <true|false>
