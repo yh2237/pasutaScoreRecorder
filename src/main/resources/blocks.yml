@@ -19,7 +19,6 @@ excluded:
   - minecraft:bedrock
   - minecraft:command_block
   - minecraft:leaf_litter
-  # Signs
   - minecraft:oak_sign
   - minecraft:spruce_sign
   - minecraft:birch_sign
@@ -53,7 +52,6 @@ excluded:
   - minecraft:bamboo_hanging_sign
   - minecraft:crimson_hanging_sign
   - minecraft:warped_hanging_sign
-  # Carpets
   - minecraft:white_carpet
   - minecraft:orange_carpet
   - minecraft:magenta_carpet
@@ -70,7 +68,6 @@ excluded:
   - minecraft:green_carpet
   - minecraft:red_carpet
   - minecraft:black_carpet
-  # Leaves & Plants
   - minecraft:oak_leaves
   - minecraft:spruce_leaves
   - minecraft:birch_leaves
@@ -105,7 +102,6 @@ excluded:
   - minecraft:pitcher_plant
   - minecraft:vine
   - minecraft:lily_pad
-  # Functional & Decorative
   - minecraft:torch
   - minecraft:wall_torch
   - minecraft:soul_torch
@@ -140,7 +136,6 @@ excluded:
 # ブロックを壊したときに得られるスコア
 # <ID>: <スコア>
 
-# Ores
 minecraft:coal_ore: 5
 minecraft:deepslate_coal_ore: 5
 minecraft:iron_ore: 8
@@ -160,8 +155,6 @@ minecraft:deepslate_diamond_ore: 30
 minecraft:nether_gold_ore: 5
 minecraft:nether_quartz_ore: 5
 minecraft:ancient_debris: 100
-
-# Stones & Rare Blocks
 minecraft:stone: 1
 minecraft:deepslate: 2
 minecraft:granite: 2

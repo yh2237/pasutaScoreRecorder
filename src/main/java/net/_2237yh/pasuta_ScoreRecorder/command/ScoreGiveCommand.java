@@ -37,10 +37,10 @@ public class ScoreGiveCommand implements CommandExecutor {
                 List<Entity> entities = Bukkit.selectEntities(sender, selector);
                 for (Entity entity : entities) {
                     if (entity instanceof Player) {
-                        return (Player) entity; // 最初のプレイヤーを返す
+                        return (Player) entity;
                     }
                 }
-                return null; // プレイヤーが見つからなかった
+                return null;
             } catch (IllegalArgumentException e) {
                 sender.sendMessage("§c不正なセレクター構文です: " + selector);
                 return null;

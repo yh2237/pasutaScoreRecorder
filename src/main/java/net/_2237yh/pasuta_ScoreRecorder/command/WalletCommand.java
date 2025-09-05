@@ -53,7 +53,7 @@ public class WalletCommand implements CommandExecutor {
                 int scoreArgIndex;
 
                 if (sender instanceof Player && args.length < 3) {
-                    // プレイヤーが実行: /wallet exchange <score>
+
                     targetPlayer = (Player) sender;
                     if (args.length < 2) {
                         sender.sendMessage("§e使い方: /wallet exchange <score>");
@@ -61,7 +61,7 @@ public class WalletCommand implements CommandExecutor {
                     }
                     scoreArgIndex = 1;
                 } else {
-                    // コンソール/コマンドブロックまたはプレイヤーが他者を指定: /wallet exchange <player> <score>
+
                     if (!sender.hasPermission(ADMIN_PERMISSION)) return noPermission(sender);
                     if (args.length < 3) {
                         sender.sendMessage("§e使い方: /wallet exchange <player> <score>");
