@@ -12,13 +12,13 @@
 default: 1
 
 # 壊してもスコアを得られないブロック
-# excluded:
-#   - <ID>
-#   - <ID>
 excluded:
-  - minecraft:bedrock
-  - minecraft:command_block
-  - minecraft:leaf_litter
+# ---破壊不可 ---
+  - minecraft:bedrock          # 岩盤
+  - minecraft:command_block    # コマンドブロック
+  - minecraft:barrier          # バリア
+
+# --- 看板 ---
   - minecraft:oak_sign
   - minecraft:spruce_sign
   - minecraft:birch_sign
@@ -30,17 +30,6 @@ excluded:
   - minecraft:bamboo_sign
   - minecraft:crimson_sign
   - minecraft:warped_sign
-  - minecraft:oak_wall_sign
-  - minecraft:spruce_wall_sign
-  - minecraft:birch_wall_sign
-  - minecraft:jungle_wall_sign
-  - minecraft:acacia_wall_sign
-  - minecraft:dark_oak_wall_sign
-  - minecraft:mangrove_wall_sign
-  - minecraft:cherry_wall_sign
-  - minecraft:bamboo_wall_sign
-  - minecraft:crimson_wall_sign
-  - minecraft:warped_wall_sign
   - minecraft:oak_hanging_sign
   - minecraft:spruce_hanging_sign
   - minecraft:birch_hanging_sign
@@ -52,6 +41,8 @@ excluded:
   - minecraft:bamboo_hanging_sign
   - minecraft:crimson_hanging_sign
   - minecraft:warped_hanging_sign
+
+# --- カーペット ---
   - minecraft:white_carpet
   - minecraft:orange_carpet
   - minecraft:magenta_carpet
@@ -68,6 +59,9 @@ excluded:
   - minecraft:green_carpet
   - minecraft:red_carpet
   - minecraft:black_carpet
+  - minecraft:moss_carpet
+
+# --- 葉---
   - minecraft:oak_leaves
   - minecraft:spruce_leaves
   - minecraft:birch_leaves
@@ -78,91 +72,119 @@ excluded:
   - minecraft:flowering_azalea_leaves
   - minecraft:mangrove_leaves
   - minecraft:cherry_leaves
-  - minecraft:grass
-  - minecraft:fern
-  - minecraft:dead_bush
-  - minecraft:dandelion
-  - minecraft:poppy
-  - minecraft:blue_orchid
-  - minecraft:allium
-  - minecraft:azure_bluet
-  - minecraft:red_tulip
-  - minecraft:orange_tulip
-  - minecraft:white_tulip
-  - minecraft:pink_tulip
-  - minecraft:oxeye_daisy
-  - minecraft:cornflower
-  - minecraft:lily_of_the_valley
-  - minecraft:wither_rose
-  - minecraft:sunflower
-  - minecraft:lilac
-  - minecraft:rose_bush
-  - minecraft:peony
-  - minecraft:torchflower
-  - minecraft:pitcher_plant
-  - minecraft:vine
-  - minecraft:lily_pad
-  - minecraft:torch
-  - minecraft:wall_torch
-  - minecraft:soul_torch
-  - minecraft:soul_wall_torch
-  - minecraft:lantern
-  - minecraft:soul_lantern
-  - minecraft:glass
-  - minecraft:glass_pane
-  - minecraft:chest
-  - minecraft:trapped_chest
-  - minecraft:ender_chest
-  - minecraft:crafting_table
-  - minecraft:furnace
-  - minecraft:blast_furnace
-  - minecraft:smoker
-  - minecraft:ladder
-  - minecraft:rail
-  - minecraft:powered_rail
-  - minecraft:detector_rail
-  - minecraft:activator_rail
-  - minecraft:lever
-  - minecraft:stone_button
-  - minecraft:oak_button
-  - minecraft:redstone_torch
-  - minecraft:redstone_wire
-  - minecraft:repeater
-  - minecraft:comparator
-  - minecraft:tripwire_hook
-  - minecraft:tripwire
-  - minecraft:scaffolding
+
+# --- 草花 ---
+  - minecraft:grass #草
+  - minecraft:fern #シダ
+  - minecraft:dead_bush #枯れ木
+  - minecraft:dandelion #タンポポ
+  - minecraft:poppy #ポピー
+  - minecraft:blue_orchid #青色のラン
+  - minecraft:allium #アリウム
+  - minecraft:azure_bluet #ヒナソウ
+  - minecraft:red_tulip #赤いチューリップ
+  - minecraft:orange_tulip #オレンジ色のチューリップ
+  - minecraft:white_tulip #白いチューリップ
+  - minecraft:pink_tulip #ピンクのチューリップ
+  - minecraft:oxeye_daisy #フランスギク
+  - minecraft:cornflower #ヤグルマギク
+  - minecraft:lily_of_the_valley #スズラン
+  - minecraft:wither_rose #ウィザーローズ
+  - minecraft:sunflower #ヒマワリ
+  - minecraft:lilac #ライラック
+  - minecraft:rose_bush #バラの低木
+  - minecraft:peony #ボタン
+  - minecraft:torchflower #トーチフラワー
+  - minecraft:pitcher_plant #ウツボカズラ
+  - minecraft:vine #ツタ
+  - minecraft:lily_pad #スイレンの葉
+  - minecraft:tall_grass #背の高い草
+  - minecraft:large_fern #大きなシダ
+  - minecraft:seagrass #海草
+  - minecraft:tall_seagrass #背の高い海草
+  - minecraft:kelp #コンブ
+  - minecraft:kelp_plant #コンブの茎
+  - minecraft:cave_vines #洞窟のツタ
+  - minecraft:cave_vines_plant #洞窟のツタの植物
+  - minecraft:weeping_vines #しだれツタ
+  - minecraft:weeping_vines_plant #しだれツタの植物
+  - minecraft:twisting_vines #ねじれツタ
+  - minecraft:twisting_vines_plant #ねじれツタの植物
+  - minecraft:glow_lichen #ヒカリゴケ
+  - minecraft:moss_block #苔ブロック
+  - minecraft:small_dripleaf #小さなドリップリーフ
+  - minecraft:big_dripleaf #大きなドリップリーフ
+  - minecraft:big_dripleaf_stem #大きなドリップリーフの茎
+  - minecraft:spore_blossom #胞子の花
+  - minecraft:hanging_roots #垂れ根
+  - minecraft:bamboo #竹
+  - minecraft:sugar_cane #サトウキビ
+
+# --- その他 ---
+  - minecraft:torch #松明
+  - minecraft:soul_torch #魂の松明
+  - minecraft:lantern #ランタン
+  - minecraft:soul_lantern #魂のランタン
+  - minecraft:glass #ガラス
+  - minecraft:glass_pane #ガラス板
+  - minecraft:chest #チェスト
+  - minecraft:trapped_chest #トラップチェスト
+  - minecraft:ender_chest #エンダーチェスト
+  - minecraft:crafting_table #作業台
+  - minecraft:furnace #かまど
+  - minecraft:blast_furnace #溶鉱炉
+  - minecraft:smoker #燻製器
+  - minecraft:ladder #はしご
+  - minecraft:rail #レール
+  - minecraft:powered_rail #パワードレール
+  - minecraft:detector_rail #ディテクターレール
+  - minecraft:activator_rail #アクティベーターレール
+  - minecraft:lever #レバー
+  - minecraft:stone_button #石のボタン
+  - minecraft:oak_button #オークのボタン
+  - minecraft:redstone_torch #レッドストーントーチ
+  - minecraft:redstone_wire #レッドストーンワイヤー
+  - minecraft:repeater #レッドストーンリピーター
+  - minecraft:comparator #レッドストーンコンパレーター
+  - minecraft:tripwire_hook #トリップワイヤーフック
+  - minecraft:tripwire #トリップワイヤー
+  - minecraft:scaffolding #足場
 
 # ブロックを壊したときに得られるスコア
-# <ID>: <スコア>
+# ID: <スコア>
+# --- 鉱石 ---
+minecraft:coal_ore: 4              # 石炭鉱石
+minecraft:deepslate_coal_ore: 5    # 深層石炭鉱石
+minecraft:iron_ore: 6              # 鉄鉱石
+minecraft:deepslate_iron_ore: 7    # 深層鉄鉱石
+minecraft:copper_ore: 4            # 銅鉱石
+minecraft:deepslate_copper_ore: 5  # 深層銅鉱石
+minecraft:gold_ore: 12             # 金鉱石
+minecraft:deepslate_gold_ore: 13   # 深層金鉱石
+minecraft:redstone_ore: 6          # レッドストーン鉱石
+minecraft:deepslate_redstone_ore: 7 # 深層レッドストーン鉱石
+minecraft:emerald_ore: 20          # エメラルド鉱石
+minecraft:deepslate_emerald_ore: 22 # 深層エメラルド鉱石
+minecraft:lapis_ore: 10            # ラピスラズリ鉱石
+minecraft:deepslate_lapis_ore: 11  # 深層ラピスラズリ鉱石
+minecraft:diamond_ore: 25          # ダイヤモンド鉱石
+minecraft:deepslate_diamond_ore: 27 # 深層ダイヤモンド鉱石
+minecraft:nether_gold_ore: 5       # ネザー金鉱石
+minecraft:nether_quartz_ore: 6     # ネザークォーツ鉱石
+minecraft:ancient_debris: 80       # 古代の残骸
 
-minecraft:coal_ore: 5
-minecraft:deepslate_coal_ore: 5
-minecraft:iron_ore: 8
-minecraft:deepslate_iron_ore: 8
-minecraft:copper_ore: 6
-minecraft:deepslate_copper_ore: 6
-minecraft:gold_ore: 15
-minecraft:deepslate_gold_ore: 15
-minecraft:redstone_ore: 7
-minecraft:deepslate_redstone_ore: 7
-minecraft:emerald_ore: 25
-minecraft:deepslate_emerald_ore: 25
-minecraft:lapis_ore: 12
-minecraft:deepslate_lapis_ore: 12
-minecraft:diamond_ore: 30
-minecraft:deepslate_diamond_ore: 30
-minecraft:nether_gold_ore: 5
-minecraft:nether_quartz_ore: 5
-minecraft:ancient_debris: 100
-minecraft:stone: 1
-minecraft:deepslate: 2
-minecraft:granite: 2
-minecraft:diorite: 2
-minecraft:andesite: 2
-minecraft:tuff: 2
-minecraft:obsidian: 10
-minecraft:crying_obsidian: 15
-minecraft:amethyst_cluster: 20
-minecraft:budding_amethyst: 50
-minecraft:spawner: 200
+# --- 石材 ---
+minecraft:cobblestone: 1           # 丸石
+minecraft:stone: 1                 # 石
+minecraft:deepslate: 2             # 深層岩
+minecraft:granite: 2               # 花崗岩
+minecraft:diorite: 2               # 閃緑岩
+minecraft:andesite: 2              # 安山岩
+minecraft:tuff: 2                  # 凝灰岩
+
+# --- 特殊 ---
+minecraft:obsidian: 5              # 黒曜石
+minecraft:crying_obsidian: 15      # 泣く黒曜石
+minecraft:amethyst_cluster: 20     # アメジストの塊
+minecraft:budding_amethyst: 50     # 芽生えたアメジスト
+minecraft:spawner: 200             # スポナー

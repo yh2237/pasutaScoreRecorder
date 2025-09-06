@@ -20,36 +20,47 @@ excluded:
 # モブを倒したときに得られるスコア
 # <ID>: <スコア>
 
-minecraft:zombie: 1
-minecraft:husk: 1
-minecraft:drowned: 1
-minecraft:skeleton: 1
-minecraft:stray: 2
-minecraft:creeper: 1
-minecraft:spider: 1
-minecraft:cave_spider: 1
-minecraft:witch: 2
-minecraft:slime: 2
-minecraft:phantom: 1
-minecraft:guardian: 2
-minecraft:pillager: 1
-minecraft:vindicator: 2
-minecraft:evoker: 5
-minecraft:ravager: 5
-minecraft:zombified_piglin: 4
-minecraft:piglin: 8
-minecraft:piglin_brute: 5
-minecraft:hoglin: 2
-minecraft:zoglin: 2
-minecraft:ghast: 2
-minecraft:blaze: 2
-minecraft:magma_cube: 3
-minecraft:wither_skeleton: 2
-minecraft:enderman: 3
-minecraft:wolf: 3
-minecraft:polar_bear: 3
-minecraft:iron_golem: 3
-minecraft:elder_guardian: 5
-minecraft:warden: 20
-minecraft:wither: 10
-minecraft:ender_dragon: 20
+# --- オーバーワールド ---
+minecraft:zombie: 1             # ゾンビ
+minecraft:husk: 2                # ハスク
+minecraft:drowned: 2             # ドラウンド
+minecraft:skeleton: 1            # スケルトン
+minecraft:stray: 2                # ストレイ
+minecraft:creeper: 1             # クリーパー
+minecraft:spider: 1              # 蜘蛛
+minecraft:cave_spider: 1         # 洞窟蜘蛛
+minecraft:witch: 3                # ウィッチ
+minecraft:slime: 1                # スライム
+minecraft:phantom: 2             # ファントム
+minecraft:guardian: 3            # ガーディアン
+
+# --- ピリジャー ---
+minecraft:pillager: 2            # ピリジャー
+minecraft:vindicator: 4          # ヴィンディケーター
+minecraft:evoker: 10               # エヴォーカー
+minecraft:ravager: 15             # ラヴェジャー
+
+# --- ネザー ---
+minecraft:zombified_piglin: 2    # ゾンビピグリン
+minecraft:piglin: 3              # ピグリン
+minecraft:piglin_brute: 15       # ピグリンブルート
+minecraft:hoglin: 4              # ホグリン
+minecraft:zoglin: 4              # ゾグリン
+minecraft:ghast: 5                # ガスト
+minecraft:blaze: 4                # ブレイズ
+minecraft:magma_cube: 2          # マグマキューブ
+minecraft:wither_skeleton: 8     # ウィザースケルトン
+
+# --- エンド ---
+minecraft:enderman: 1             # エンダーマン
+
+# --- 中立 ---
+minecraft:wolf: 1                 # 狼
+minecraft:polar_bear: 2          # ホッキョクグマ
+minecraft:iron_golem: 3          # アイアンゴーレム
+
+# --- ボス ---
+minecraft:elder_guardian: 25      # エルダーガーディアン
+minecraft:warden: 100             # ウォーデン
+minecraft:wither: 75              # ウィザー
+minecraft:ender_dragon: 100       # エンラードラゴン
