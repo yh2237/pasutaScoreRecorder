@@ -10,5 +10,5 @@
 # スコア獲得メッセージ
 show-score-messages: false
 
-# 交換レート
-score-to-wallet-rate: 100
+# 初回起動時のスコア移行が完了したか
+migration-completed: false

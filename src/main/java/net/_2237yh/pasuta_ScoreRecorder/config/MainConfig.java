@@ -22,7 +22,12 @@ public class MainConfig {
         plugin.saveConfig();
     }
 
-    public int getScoreToWalletRate() {
-        return config.getInt("score-to-wallet-rate", 100);
+    public boolean isMigrationCompleted() {
+        return config.getBoolean("migration-completed", false);
+    }
+
+    public void setMigrationCompleted(boolean value) {
+        config.set("migration-completed", value);
+        plugin.saveConfig();
     }
 }

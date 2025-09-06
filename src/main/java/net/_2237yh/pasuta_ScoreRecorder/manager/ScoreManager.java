@@ -21,6 +21,7 @@ public class ScoreManager {
     private YamlConfiguration config;
     private MessageConfig messageConfig;
     private ScoreboardManager scoreboardManager;
+    private WalletManager walletManager;
 
     public ScoreManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -71,6 +72,15 @@ public class ScoreManager {
         int oldScore = getScore(player);
         int newScore = oldScore + amount;
         scores.put(id, newScore);
+
+        // ウォレット連携
+        if (walletManager != null) {
+            int walletGained = (newScore / 100) - (oldScore / 100);
+            if (walletGained > 0) {
+                walletManager.addWallet(player, walletGained);
+            }
+        }
+
         saveScores();
 
         if (scoreboardManager != null && player.isOnline()) {
@@ -133,5 +143,9 @@ public class ScoreManager {
 
     public void setScoreboardManager(ScoreboardManager scoreboardManager) {
         this.scoreboardManager = scoreboardManager;
+    }
+
+    public void setWalletManager(WalletManager walletManager) {
+        this.walletManager = walletManager;
     }
 }

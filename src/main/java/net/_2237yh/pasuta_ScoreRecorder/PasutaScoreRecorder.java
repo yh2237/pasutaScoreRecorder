@@ -1,5 +1,6 @@
 package net._2237yh.pasuta_ScoreRecorder;
 
+import net._2237yh.pasuta_ScoreRecorder.command.MigrateCommand;
 import net._2237yh.pasuta_ScoreRecorder.command.PanelCommand;
 import net._2237yh.pasuta_ScoreRecorder.command.ScoreGiveCommand;
 import net._2237yh.pasuta_ScoreRecorder.command.WalletCommand;
@@ -66,6 +67,7 @@ public class PasutaScoreRecorder extends JavaPlugin {
 
         scoreManager.setScoreboardManager(scoreboardManager);
         walletManager.setScoreboardManager(scoreboardManager);
+        scoreManager.setWalletManager(walletManager);
 
         scoreManager.setMessageConfig(messageConfig);
 
@@ -81,9 +83,16 @@ public class PasutaScoreRecorder extends JavaPlugin {
 
         getLogger().info("Pasuta_ScoreRecorder が起動！");
 
-        getCommand("psr").setExecutor(new ScoreGiveCommand(scoreManager, walletManager, mainConfig));
-        getCommand("wallet").setExecutor(new WalletCommand(scoreManager, walletManager, mainConfig));
+        ScoreGiveCommand scoreGiveCommand = new ScoreGiveCommand(scoreManager, walletManager, mainConfig);
+        getCommand("psr").setExecutor(scoreGiveCommand);
+        getCommand("psr").setTabCompleter(scoreGiveCommand);
+
+        WalletCommand walletCommand = new WalletCommand(walletManager);
+        getCommand("wallet").setExecutor(walletCommand);
+        getCommand("wallet").setTabCompleter(walletCommand);
+
         getCommand("panel").setExecutor(new PanelCommand(panelManager, scoreboardManager));
+        getCommand("psr-migrate").setExecutor(new MigrateCommand(mainConfig, scoreManager, walletManager));
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new ScorePlaceholder(this, scoreManager).register();

@@ -1,26 +1,26 @@
 package net._2237yh.pasuta_ScoreRecorder.command;
 
-import net._2237yh.pasuta_ScoreRecorder.config.MainConfig;
-import net._2237yh.pasuta_ScoreRecorder.manager.ScoreManager;
 import net._2237yh.pasuta_ScoreRecorder.manager.WalletManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class WalletCommand implements CommandExecutor {
-    private final ScoreManager scoreManager;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class WalletCommand implements CommandExecutor, TabCompleter {
     private final WalletManager walletManager;
-    private final MainConfig mainConfig;
     private static final String ADMIN_PERMISSION = "pasutascore.admin";
 
-    public WalletCommand(ScoreManager scoreManager, WalletManager walletManager, MainConfig mainConfig) {
-        this.scoreManager = scoreManager;
+    public WalletCommand(WalletManager walletManager) {
         this.walletManager = walletManager;
-        this.mainConfig = mainConfig;
     }
 
     private boolean noPermission(CommandSender sender) {
@@ -31,7 +31,7 @@ public class WalletCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage("§e使い方: /wallet <balance|exchange|give|add|remove|buy> ...");
+            sender.sendMessage("§e使い方: /wallet <balance|give|add|remove|buy> ...");
             return true;
         }
 
@@ -45,69 +45,6 @@ public class WalletCommand implements CommandExecutor {
                 }
                 int balance = walletManager.getWallet(player);
                 player.sendMessage("§aあなたのウォレット残高: §e" + balance);
-                return true;
-            }
-
-            case "exchange": {
-                Player targetPlayer;
-                int scoreArgIndex;
-
-                if (sender instanceof Player && args.length < 3) {
-
-                    targetPlayer = (Player) sender;
-                    if (args.length < 2) {
-                        sender.sendMessage("§e使い方: /wallet exchange <score>");
-                        return true;
-                    }
-                    scoreArgIndex = 1;
-                } else {
-
-                    if (!sender.hasPermission(ADMIN_PERMISSION)) return noPermission(sender);
-                    if (args.length < 3) {
-                        sender.sendMessage("§e使い方: /wallet exchange <player> <score>");
-                        return true;
-                    }
-                    targetPlayer = ScoreGiveCommand.getPlayerFromSelector(sender, args[1]);
-                    if (targetPlayer == null) {
-                        sender.sendMessage("§cプレイヤーが見つかりません: " + args[1]);
-                        return true;
-                    }
-                    scoreArgIndex = 2;
-                }
-
-                try {
-                    int scoreToConvert = Integer.parseInt(args[scoreArgIndex]);
-                    if (scoreToConvert <= 0) {
-                        targetPlayer.sendMessage("§c正のスコアを指定してください");
-                        return true;
-                    }
-                    int conversionRate = mainConfig.getScoreToWalletRate();
-                    if (conversionRate <= 0) {
-                        sender.sendMessage("§c換金レートが正しく設定されていません。");
-                        return true;
-                    }
-                    if (scoreToConvert % conversionRate != 0) {
-                        targetPlayer.sendMessage("§c" + conversionRate + "スコア単位で換金できます");
-                        return true;
-                    }
-                    int currentScore = scoreManager.getScore(targetPlayer);
-                    if (currentScore < scoreToConvert) {
-                        targetPlayer.sendMessage("§cスコアが不足しています");
-                        if (!sender.equals(targetPlayer)) {
-                            sender.sendMessage("§c" + targetPlayer.getName() + "のスコアが不足しています");
-                        }
-                        return true;
-                    }
-                    int walletToAdd = scoreToConvert / conversionRate;
-                    scoreManager.setScore(targetPlayer, currentScore - scoreToConvert);
-                    walletManager.addWallet(targetPlayer, walletToAdd);
-                    targetPlayer.sendMessage("§a" + scoreToConvert + "スコアを " + walletToAdd + " ウォレットに交換しました");
-                    if (!sender.equals(targetPlayer)) {
-                        sender.sendMessage("§a" + targetPlayer.getName() + "のスコアを " + walletToAdd + " ウォレットに交換させました");
-                    }
-                } catch (NumberFormatException e) {
-                    sender.sendMessage("§cスコアは整数で指定してください");
-                }
                 return true;
             }
 
@@ -216,5 +153,21 @@ public class WalletCommand implements CommandExecutor {
                 return true;
             }
         }
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        List<String> completions = new ArrayList<>();
+        if (args.length == 1) {
+            return Arrays.asList("balance", "give", "add", "remove", "buy");
+        }
+        if (args.length == 2) {
+            if (Arrays.asList("give", "add", "remove", "buy").contains(args[0].toLowerCase())) {
+                return Bukkit.getOnlinePlayers().stream()
+                        .map(Player::getName)
+                        .collect(Collectors.toList());
+            }
+        }
+        return completions;
     }
 }

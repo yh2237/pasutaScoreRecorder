@@ -8,13 +8,17 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ScoreGiveCommand implements CommandExecutor {
+public class ScoreGiveCommand implements CommandExecutor, TabCompleter {
     private final ScoreManager scoreManager;
     private final WalletManager walletManager;
     private final MainConfig mainConfig;
@@ -104,8 +108,7 @@ public class ScoreGiveCommand implements CommandExecutor {
                 }
                 try {
                     int amount = Integer.parseInt(args[2]);
-                    int current = scoreManager.getScore(target);
-                    scoreManager.setScore(target, current + amount);
+                    scoreManager.addScore(target, amount);
                     sender.sendMessage("§a" + target.getName() + " に §b+" + amount + " §aスコアを追加しました");
                 } catch (NumberFormatException e) {
                     sender.sendMessage("§cスコアは整数で指定してください");
@@ -113,84 +116,27 @@ public class ScoreGiveCommand implements CommandExecutor {
                 return true;
             }
 
-            case "remove": {
-                if (!sender.hasPermission(ADMIN_PERMISSION)) return noPermission(sender);
-                if (args.length < 3) {
-                    sender.sendMessage("§e使い方: /psr remove <player> <score>");
-                    return true;
-                }
-                Player target = getPlayerFromSelector(sender, args[1]);
-                if (target == null) {
-                    sender.sendMessage("§cプレイヤーが見つかりません: " + args[1]);
-                    return true;
-                }
-                try {
-                    int amount = Integer.parseInt(args[2]);
-                    int current = scoreManager.getScore(target);
-                    int newScore = Math.max(0, current - amount);
-                    scoreManager.setScore(target, newScore);
-                    sender.sendMessage("§a" + target.getName() + " から §c-" + amount + " §aスコアを減算しました（残: §e" + newScore + "）");
-                } catch (NumberFormatException e) {
-                    sender.sendMessage("§cスコアは整数で指定してください");
-                }
-                return true;
-            }
-
-            case "give": {
-                if (!sender.hasPermission(ADMIN_PERMISSION)) return noPermission(sender);
-                if (args.length < 5) {
-                    sender.sendMessage("§e使い方: /psr give <player> <item> <amount> <cost>");
-                    return true;
-                }
-
-                Player target = getPlayerFromSelector(sender, args[1]);
-                if (target == null) {
-                    sender.sendMessage("§cプレイヤーが見つかりません: " + args[1]);
-                    return true;
-                }
-
-                String itemName = args[2].toUpperCase();
-                int amount, cost;
-                try {
-                    amount = Integer.parseInt(args[3]);
-                    cost = Integer.parseInt(args[4]);
-                } catch (NumberFormatException e) {
-                    sender.sendMessage("§c個数とコストは整数で指定してください");
-                    return true;
-                }
-
-                if (amount <= 0) {
-                    sender.sendMessage("§c個数は1以上で指定してください");
-                    return true;
-                }
-
-                Material material = Material.matchMaterial(itemName);
-                if (material == null) {
-                    sender.sendMessage("§c不正なアイテム名: " + itemName);
-                    return true;
-                }
-
-                long totalCost = (long) cost * amount;
-                int currentScore = scoreManager.getScore(target);
-                if (currentScore < totalCost) {
-                    sender.sendMessage("§c" + target.getName() + " のスコアが不足しています。必要: " + totalCost + ", 所持: " + currentScore);
-                    return true;
-                }
-
-                scoreManager.setScore(target, (int) (currentScore - totalCost));
-
-                ItemStack item = new ItemStack(material, amount);
-
-                target.getInventory().addItem(item);
-                sender.sendMessage("§a" + target.getName() + " に §6" + itemName + " §aを " + amount + "個付与しました（-" + totalCost + "スコア）");
-                return true;
-            }
-
             default: {
                 sender.sendMessage("§c不明なサブコマンド: " + sub);
-                sender.sendMessage("§e使い方: /psr <give|list|add|remove>");
+                sender.sendMessage("§e使い方: /psr <toggle|list|add>");
                 return true;
             }
         }
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        List<String> completions = new ArrayList<>();
+        if (args.length == 1) {
+            return Arrays.asList("toggle", "list", "add");
+        }
+        if (args.length == 2) {
+            if (args[0].equalsIgnoreCase("list") || args[0].equalsIgnoreCase("add")) {
+                return Bukkit.getOnlinePlayers().stream()
+                        .map(Player::getName)
+                        .collect(Collectors.toList());
+            }
+        }
+        return completions;
     }
 }

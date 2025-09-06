@@ -21,3 +21,7 @@ commands:
   panel:
     description: スコアボードの表示を切り替えるコマンド
     usage: /panel <true|false>
+  psr-migrate:
+    description: 初回起動時にスコアをウォレットに移行するコマンド
+    usage: /psr-migrate
+    permission: pasutascore.admin
